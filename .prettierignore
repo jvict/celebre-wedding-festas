@@ -1,0 +1,7 @@
+node_modules
+dist
+.next
+package-lock.json
+docs/aula-1
+docs/aula-2
+docs/aula-3

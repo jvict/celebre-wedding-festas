@@ -1,0 +1,31 @@
+{
+  "name": "celebre-wedding-festas",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Plataforma web para divulgar profissionais de eventos, gerenciar inscrições e confirmar presenças (Projeto Interdisciplinar II - Eventos Star).",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,magenta \"npm run dev -w @celebre/api\" \"npm run dev -w @celebre/web\"",
+    "dev:api": "npm run dev -w @celebre/api",
+    "dev:web": "npm run dev -w @celebre/web",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "db:up": "docker compose up -d db",
+    "db:down": "docker compose down",
+    "db:generate": "npm run db:generate -w @celebre/api",
+    "db:migrate": "npm run db:migrate -w @celebre/api",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "prettier": "^3.3.0"
+  }
+}

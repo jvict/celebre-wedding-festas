@@ -1,0 +1,32 @@
+// Schema do banco (PostgreSQL). Cresce módulo a módulo; hoje cobre só "professionals".
+// O modelo completo será definido na Aula 5 (Banco de Dados).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProfessionalStatus {
+  pending
+  approved
+  rejected
+}
+
+model ProfessionalRecord {
+  id               String             @id
+  businessName     String
+  category         String
+  shortDescription String
+  coverImageUrl    String?
+  // Lista de canais públicos: [{ "channel": "whatsapp", "value": "11999999999" }]
+  contacts         Json
+  status           ProfessionalStatus @default(pending)
+  createdAt        DateTime           @default(now())
+
+  @@index([status, category])
+  @@map("professionals")
+}
